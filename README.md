@@ -147,8 +147,7 @@ template<class T>
 void ListIterator<T>::setData(const T value){list.insert(value); current++;}
 
 
-
-int main()
+main()
 {
 	try{
 	List<int> intList(10);
