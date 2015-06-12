@@ -1,181 +1,114 @@
-#include<iostream>
-#include<string>
-using namespace std;
-template <class T>
-class ListIterator;
-template<class T>
-class List
-{
-	friend class ListIterator<T>; //declaration of <Template>class iterator 
-
-public:
-	List(int size);
-	~List(){ delete [] listArray; }
-
-	bool isFull() { return mSize == MaxSize; }
-	bool isEmpty() { return mSize == 0; }
-	int length() { return mSize; }
-	void insert(const T value);
-	bool remove(const T value);
-	void setData(int index, T value);
-	T getData(int index);
-	int search(T key);
-	List(const List & other);//copy constructor
-	const List& operator=(const List & rhs);  //assignment operator
-
-private:
-	bool removeAt(int index);
-	int MaxSize;
-	int mSize;
-	T *listArray;
-
-};
-template<class T>
-List<T>::List(int size)
-{
-	if (size < 1)  throw  "ILLEGAL_SIZE";
-	else{ MaxSize = size;
-	listArray = new T[MaxSize];
-	if (listArray == NULL) throw "OUT_OF_MEMORY";
-
-	mSize = 0;
-	}
-}
-
-template<class T>
-void List<T>::insert(const T value)
-{
-	if (isFull()) throw "OUT_OF_SPACE";
-		listArray[mSize] = value;
-		mSize++;
-}
-
-template<class T>
-bool List<T>::remove(const T value)
-{
-	int index = search(value);
-	if (index == -1) return false;
-	else return removeAt(index);
-}
-
-template<class T>
-bool List<T>::removeAt(int index)
-{
-	if (index < 0 || index >= mSize)
-		throw "ILLEGAL_INDEX";
-	else
-	{
-		listArray[index] = listArray[mSize - 1];
-		mSize--;
-		return true;
-	}
-
-}
-template<class T>
-T List<T>::getData(int index)
-{
-	if (index < 0 || index >= mSize) throw "ILLEGAL_INDEX";
-	else	return listArray[index];
-}
-
-template<class T>
-void List<T>::setData(int index, T value)
-{
-	if (index < 0 || index >= mSize) throw "ILLEGAL_INDEX";
-	else	 listArray[index]=value;
-}
-
-template<class T>
-int List<T>::search(T key)
-{
-	for (int i = 0; i < mSize;i++)
-	if (listArray[i] == key) return i;
-
-	return mSize;
-}
-
-template<class T>
-List<T>::List(const List &other)
-{ 
-	other=&list;
-
-}
+<?php
+include('Login.php'); // include login scripit
+?>
+<!doctype html>
+<html>
+<head>
+    <title>Log in</title>
+    <link href="style.css" rel="stylesheet">
+ 
+</head>
+<body>
 
 
-template <class T>
-class ListIterator {
-private:
-List<T> &list;
-int current;
-ListIterator & operator =(const ListIterator & rhs);
-// disallow assignment
-public:
+<div class="header">
+     <div class="header_bar">
+        <img src="images/logo.jpg" width="150" height="100">
+        
+</div>
+</div>
+    
 
-ListIterator( List<T> &l): list(l) {current=0; }
-ListIterator(const ListIterator<T> &li): list(li.list), current(li.current) { } // copy constructor
+<section data-role="content">
 
-// overloaded assignment operator
+ <div class="content">
 
-void begin(){current = 0;}
+ <hgroup class="title"><h1>Log in.</h1></hgroup>
+ <form action="login.php" novalidate method="post">
+ <div class="content_noborder">
+ <div class="reg_box">
+   <div class="head_bar2"> Not yet registered? </div>
+   <div class="content_reg">
+   "
+                You must be registered to place an ad.
+           "
+           <br>
+           <br>
+           <br>
+           "
 
-void end() {current = list.mSize;}
+                If you are not registered yet , "
+                <a class="abutton" href="Register.html">Click here</a>
+                <br>
+                "
+                Registration is "
+                <b>free of charge and without obligation.</b>
+                <br>
+                <br>
+                "
 
-bool isStart() {return current == 0;}
+                If you are registered, enter your ID and password on the right-hand side of this page."
+            
+           </div>     
+   </div>
+     <div class="reg_box">
+     <div class="head_bar2">Already registered?</div>
+     <div class="content_reg">
+     <div class="reg_bar">
+                    <b>To access your account, enter your user name and password and then click on Confirm :</b>
+                </div>
 
-bool isDone() {return (current==list.mSize); }
+                <div class="reg_bar">
+                    <div class="reg_smallbar_left" style="margin-top: 5px">
+                        User name :
+                    </div>
+                    <div class="reg_smallbar_right">
+                        <input class="txt_box" data-val="true" data-val-required="The User name field is required." id="UserName" name="username" required type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
 
-void next() {
+                <div class="reg_bar">
+                    <div class="reg_smallbar_left" style="margin-top: 5px">
+                        Password :
+                    </div>
+                    <div class="reg_smallbar_right">
+                        <input class="txt_box" data-val="true" data-val-required="The Password field is required." id="Password" name="pass_word" type="password" />
+                        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
 
-if (!isDone()) current++;
-
-else throw "ILLEGAL_REFERNCE";
-
-}
-
-
-bool find(const T key) {
-
-current = list.search(key);
-
-if (!isDone()) return true; else return false;
-}
-
-T getData(){return list.listArray[current];}  // get data of the current element
-void setData(const T value); // change value of the current element
-};
-template<class T>
-void ListIterator<T>::setData(const T value){list.insert(value); current++;}
-
-
-main()
-{
-	try{
-	List<int> intList(10);
-
-    ListIterator<int> myIterator(intList); // create iterator and
-    //attach list to it
-    int temp = 0;
-	int x=0;
-    for(int i=0;i<10;i++)
-	{cout<<"Enter Data "<<i+1<<"#";
-	  cin>>x;
-	myIterator.setData(x);
-	}
-	
-	myIterator.begin();
-    while(!myIterator.isDone()) {         // temp now has sum of all elements
-
-    temp = temp + myIterator.getData();
-    myIterator.next();
-	}
-cout<<endl;
+                <div class="reg_bar">
+                    <div class="reg_smallbar_left">
+                    </div>
+                    <div class="reg_smallbar_right">
+                        <input type="submit"  name="submit" value="Login" class="btn_dark" />
+                    </div>
+                </div>
+                <div class="reg_bar">
+                    <span class="field-validation-valid" data-valmsg-for="Login" data-valmsg-replace="true" style="width:100%"></span>
+                </div>
 
 
-	cout<<"Sum="<<temp<<endl;
+               
+                
+            </div>
+        
+        </div>
 
-	}
-	catch (char e[]){ cout << e << endl; }
-	catch (...){  }
-system("pause");
-	return 0;
-}
+ </div>
+    </form>
+</div>
+
+</section>
+
+<!-- End DWUser_EasyRotator -->
+<section data-role="footer" class="footer">
+            <footer>
+                <div class="footer">
+                
+                </div>
+            </footer>
+        </section>
+</body>
+</html>
