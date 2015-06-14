@@ -24,7 +24,7 @@ include('Login.php'); // include login scripit
  <div class="content">
 
  <hgroup class="title"><h1>Log in.</h1></hgroup>
- <form action="login.php" novalidate method="post">
+ <form action="login.php" method="post">
  <div class="content_noborder">
  <div class="reg_box">
    <div class="head_bar2"> Not yet registered? </div>
@@ -63,8 +63,8 @@ include('Login.php'); // include login scripit
                         User name :
                     </div>
                     <div class="reg_smallbar_right">
-                        <input class="txt_box" data-val="true" data-val-required="The User name field is required." id="UserName" name="username" required type="text" value="" />
-                        <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                        <input class="txt_box"  id="UserName" name="username" required type="text" value="" />
+                       
                     </div>
                 </div>
 
@@ -73,8 +73,8 @@ include('Login.php'); // include login scripit
                         Password :
                     </div>
                     <div class="reg_smallbar_right">
-                        <input class="txt_box" data-val="true" data-val-required="The Password field is required." id="Password" name="pass_word" type="password" />
-                        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        <input class="txt_box"  id="Password" name="pass_word" type="password" />
+                       
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@ include('Login.php'); // include login scripit
                     </div>
                 </div>
                 <div class="reg_bar">
-                    <span class="field-validation-valid" data-valmsg-for="Login" data-valmsg-replace="true" style="width:100%"></span>
+                    
                 </div>
 
 
